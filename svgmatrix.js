@@ -27,5 +27,6 @@ const startPos = aMatrix.getColumnVector(0);
 aMatrix.subColumnVector(startPos);
 const transMatrix = new Matrix(aMatrix.transpose());
 console.log("transMatrix", transMatrix.to2DArray());
+
 console.log("end");
 //pathdata.forEach()
