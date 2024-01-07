@@ -16,7 +16,6 @@ const sliderCopy = tempBeatmap.hitObjects[tempBeatmap.hitObjects.length - 1];
 
 // const teststr = '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" fill="none"> <path d="M43 110C100 69 167 167 226 116C318 183 372 75 350 43" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" id="path2"/> </svg>';
 // console.log(teststr);
-console.log(sliderCopy);
 console.log(sliderCopy.path.controlPoints);
 //
 
