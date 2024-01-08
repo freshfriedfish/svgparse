@@ -12,12 +12,23 @@ const pathdata = path.getPathData({normalize:true});
 console.log(pathdata);
 //beatmap
 const tempBeatmap = new BeatmapDecoder().decodeFromString(textfile, true);
-const sliderCopy = tempBeatmap.hitObjects[tempBeatmap.hitObjects.length - 1];
+const sliderCopy = tempBeatmap.hitObjects[tempBeatmap.hitObjects.length - 1].clone();
 
 // const teststr = '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" fill="none"> <path d="M43 110C100 69 167 167 226 116C318 183 372 75 350 43" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" id="path2"/> </svg>';
 // console.log(teststr);
 console.log(sliderCopy.path.controlPoints);
-//
+/*
+C
+null
+null
+C
+null
+null
+null //last one is added as an extra
+*/
+
+
+
 
 //pathdata to slider
 pathdata.forEach((command) => {
@@ -31,8 +42,8 @@ pathdata.forEach((command) => {
     }
 });
 
-
+sliderCopy.startPosition = new Vector2(10, 10);
 
 tempBeatmap.hitObjects.push(sliderCopy);
 
-//console.log(new BeatmapEncoder().encodeToString(tempBeatmap));
+console.log(new BeatmapEncoder().encodeToString(tempBeatmap));
