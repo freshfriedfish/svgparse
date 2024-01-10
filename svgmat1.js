@@ -1,7 +1,7 @@
 import {Matrix} from "ml-matrix";
 import {Vector2} from "osu-classes";
 
-function bruh(data) {
+function bruh(data) { //returns array of arrays, where each nested array represents a 2d coordinate. accepts array
     return data.reduce((a, c, i) => {
         return i % 2 === 0 ? a.concat([data.slice(i, i + 2)]) : a;
     }, []);
@@ -12,10 +12,11 @@ const pathdata = path.getPathData({normalize: true});
 console.log(pathdata);
 
 const flatarr = pathdata.map((command) => command.values).flat(1);
+console.log(flatarr);
 const arrlen = pathdata.map((command) => command.values.length / 2);
+console.log(arrlen);
 const arrlenClone = arrlen.map(ele => ele - 1);
 //console.log(arrlenClone)
-
 
 
 //console.log("flattened array", flatarr);
@@ -42,8 +43,7 @@ const flatarr2d = flatarrMat.to2DArray()
 
 //matrix to obj
 const newControlPoints = flatarr2d.map(elem => ({
-    position: new Vector2(elem),
-    type: null,
+    position: new Vector2(elem), type: null,
 }));
 
 newControlPoints[0].type = "B";
@@ -55,8 +55,7 @@ console.log(newControlPoints)
 //matrix to SVG
 const arrlenConvert = arrlen.map(ele => flatarr2d.splice(0, ele).flat(1));
 const newPathData = pathdata.map(elem => ({
-    type: elem.type,
-    values: elem.values,
+    type: elem.type, values: elem.values,
 }));
 
 /*
@@ -73,7 +72,7 @@ for (let i = 0; i < newPathData.length; i++) {
     newPathData[i].values = arrlenConvert[i];
 }
 
-console.log("copy of path",newPathData);
+console.log("copy of path", newPathData);
 
 console.log(pathdata);
 
