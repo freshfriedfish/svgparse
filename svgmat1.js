@@ -9,65 +9,65 @@ function bruh(data) { //returns array of arrays, where each nested array represe
     }, []);
 }
 
+//all paths
+//curvex4
+//5,186,0,2,0,B|42:250|97:248|122:172|122:172|148:242|204:242|241:166|241:166|269:233|341:232|358:153|358:153|400:218|497:212|506:133,1,700
+const path3 = document.getElementById('path3');
+const path3data = path3.getPathData({normalize: true});
+console.log("path3data", path3data);
+//bump
+//76,221,0,2,0,B|186:222|186:222|215:163|302:162|318:221|318:221|435:220,1,375
+const path4 = document.getElementById('path4');
+const path4data = path4.getPathData({normalize: true});
+console.log("path4data", path4data);
+//z
+//114,189,0,2,0,B|220:262|220:262|302:121|302:121|398:178,1,400
+const path5 = document.getElementById('path5');
+const path5data = path5.getPathData({normalize: true});
+console.log("path5data", path5data);
+//wave
 const path = document.getElementById('path2');
 const pathdata = path.getPathData({normalize: true});
-console.log(pathdata);
-
 const flatarr = pathdata.map((command) => command.values).flat(1);
-console.log(flatarr);
-
-//console.log("flattened array", flatarr);
-const flatarrcopy = [...flatarr];
-
-//flatarr.splice(0, 2);
-
 const flatarrMat = new Matrix(bruh(flatarr));
-
 const startPosMat = flatarrMat.getRowVector(0);
 console.log(startPosMat.toString());
 flatarrMat.subRowVector(flatarrMat.getRowVector(0));
-
 /* the following bugs out flatarrmat
 .transpose();
 flatarrMat.subColumnVector(flatarrMat.getColumnVector(0));
 flatarrMat.transpose();
  */
-
 const flatarr2d = flatarrMat.to2DArray()
-//console.log("flatarr2d",flatarr2d);
-
-//converting svg types to an array to iterate through
-
-//matrix to obj
 const newControlPointsFixed = flatarr2d.map((elem) => {
     return new PathPoint(new Vector2(elem[0], elem[1]), null);
 });
-
 const newControlPointsCopy = flatarr2d.map((elem) => {
     return new PathPoint(new Vector2(elem[0], elem[1]), null);
 });
-
-
 const arrlen = pathdata.map(command => command.values.length / 2 - 1);
 // arrlen[arrlen.length - 1] = arrlen[arrlen.length - 1] + 1;
 console.log("arrlen", arrlen);
 
-// let iteratedval = 0;
-// for (let i = 1; i < arrlen.length; i++) {
-//     console.log(i)
-//     for (let j = 0; j < arrlen[i]; j++) {
-//         iteratedval++;
-//         console.log("ran");
-//     }
-//     newControlPointsCopy[iteratedval].type = "B";
-// }
+//attempt 1
+/*
+let iteratedval = 0;
+for (let i = 1; i < arrlen.length; i++) {
+    console.log(i)
+    for (let j = 0; j < arrlen[i]; j++) {
+        iteratedval++;
+        console.log("ran");
+    }
+    newControlPointsCopy[iteratedval].type = "B";
+}
+ */
+
 console.log("newControlPointsCopy", newControlPointsCopy);
 
 newControlPointsFixed[0].type = "B";
 newControlPointsFixed[3].type = "B";
 
 console.log("newControlPointsFixed", newControlPointsFixed);
-
 
 //UNRELATED: matrix to SVG
 const arrlenConvert = arrlen.map(ele => flatarr2d.splice(0, ele).flat(1));
