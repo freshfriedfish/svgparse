@@ -25,8 +25,10 @@ console.log("path4data", path4data);
 const path5 = document.getElementById('path5');
 const path5data = path5.getPathData({normalize: true});
 console.log("path5data", path5data);
-//wave
-const path = document.getElementById('path2');
+
+
+//main path
+const path = document.getElementById('path4');
 const pathdata = path.getPathData({normalize: true});
 const flatarr = pathdata.map((command) => command.values).flat(1);
 const flatarrMat = new Matrix(bruh(flatarr));
@@ -61,9 +63,31 @@ for (let i = 1; i < arrlen.length; i++) {
 }
  */
 
+let iteratedVal = 0;
+pathdata.forEach((command) => {
+    switch (command.type) {
+        case "M":
+            newControlPointsCopy[iteratedVal].type = "B";
+            break;
+        case "L":
+            iteratedVal++
+            newControlPointsCopy[iteratedVal].type = "B";
+            break;
+        case "C":
+            iteratedVal++;
+            iteratedVal++;
+            iteratedVal++;
+            newControlPointsCopy[iteratedVal].type = "B";
+            console.log(iteratedVal);
+            break;
+    }
+});
+newControlPointsCopy[iteratedVal].type = null;
+
 console.log("newControlPointsCopy", newControlPointsCopy);
 
 newControlPointsFixed[0].type = "B";
 newControlPointsFixed[3].type = "B";
+console.log("newControlPointsFixed", newControlPointsFixed);
 
 //convert [[2],[6]... to [[2],[2];
