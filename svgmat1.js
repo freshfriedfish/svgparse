@@ -65,16 +65,5 @@ console.log("newControlPointsCopy", newControlPointsCopy);
 
 newControlPointsFixed[0].type = "B";
 newControlPointsFixed[3].type = "B";
-//UNRELATED: matrix to SVG
-const arrlenConvert = arrlen.map(ele => flatarr2d.splice(0, ele).flat(1));
-const newPathData = pathdata.map(elem => ({
-    type: elem.type, values: elem.values,
-}));
-for (let i = 0; i < newPathData.length; i++) {
-    newPathData[i].values = arrlenConvert[i];
-}
-
-console.log("final array", arrlenConvert);
-//END
 
 //convert [[2],[6]... to [[2],[2];
