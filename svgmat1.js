@@ -31,7 +31,6 @@ const pathdata = path.getPathData({normalize: true});
 const flatarr = pathdata.map((command) => command.values).flat(1);
 const flatarrMat = new Matrix(bruh(flatarr));
 const startPosMat = flatarrMat.getRowVector(0);
-console.log(startPosMat.toString());
 flatarrMat.subRowVector(flatarrMat.getRowVector(0));
 /* the following bugs out flatarrmat
 .transpose();
@@ -66,28 +65,16 @@ console.log("newControlPointsCopy", newControlPointsCopy);
 
 newControlPointsFixed[0].type = "B";
 newControlPointsFixed[3].type = "B";
-
-console.log("newControlPointsFixed", newControlPointsFixed);
-
 //UNRELATED: matrix to SVG
 const arrlenConvert = arrlen.map(ele => flatarr2d.splice(0, ele).flat(1));
 const newPathData = pathdata.map(elem => ({
     type: elem.type, values: elem.values,
-})); //END
-
-/*
-position:[10,10],
-type: "B"
- */
-
+}));
 for (let i = 0; i < newPathData.length; i++) {
     newPathData[i].values = arrlenConvert[i];
 }
-console.log("copy of path", newPathData);
-
-console.log(pathdata);
 
 console.log("final array", arrlenConvert);
-
+//END
 
 //convert [[2],[6]... to [[2],[2];
