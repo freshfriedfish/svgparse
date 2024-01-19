@@ -28,11 +28,11 @@ console.log("path5data", path5data);
 
 
 //main path
-const path = document.getElementById('path4');
+const path = document.getElementById('path5');
 const pathdata = path.getPathData({normalize: true});
 const flatarr = pathdata.map((command) => command.values).flat(1);
 const flatarrMat = new Matrix(bruh(flatarr));
-const startPosMat = flatarrMat.getRowVector(0);
+const startPos = flatarrMat.getRowVector(0).to1DArray();
 flatarrMat.subRowVector(flatarrMat.getRowVector(0));
 /* the following bugs out flatarrmat
 .transpose();
@@ -84,10 +84,10 @@ pathdata.forEach((command) => {
 });
 newControlPointsCopy[iteratedVal].type = null;
 
-console.log("newControlPointsCopy", newControlPointsCopy);
-
-newControlPointsFixed[0].type = "B";
-newControlPointsFixed[3].type = "B";
-console.log("newControlPointsFixed", newControlPointsFixed);
-
-//convert [[2],[6]... to [[2],[2];
+//beatmap
+const tempBeatmap = new BeatmapDecoder().decodeFromString(textfile, true);
+const sliderCopy = tempBeatmap.hitObjects[tempBeatmap.hitObjects.length - 1].clone();
+sliderCopy.startPosition = new Vector2(startPos[0], startPos[1]);
+sliderCopy.path = new SliderPath("B", newControlPointsCopy, 400);
+tempBeatmap.hitObjects.push(sliderCopy);
+console.log(new BeatmapEncoder().encodeToString(tempBeatmap));
